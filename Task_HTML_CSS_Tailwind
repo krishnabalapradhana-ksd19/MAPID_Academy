@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio & Jurnal - Alvito Krishna Balapradhana</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <script src="https://cdn.jsdelivr.net/gh/python-visualization/folium@main/folium/templates/leaflet_heat.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.css"/>
+    <script src="https://cdn.jsdelivr.net/gh/digidem/leaflet-side-by-side@2.0.0/leaflet-side-by-side.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #171717; }
+        ::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 4px; }
+        
+        /* Folium Map Container Fixes */
+        #interactive-map-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            z-index: 10;
+        }
+        .leaflet-container { font-family: 'Plus Jakarta Sans', sans-serif !important; }
+        .leaflet-control-container .leaflet-routing-container, 
+        .leaflet-control-container .leaflet-bar { background-color: #171717; border-color: #3f3f46; color: #fff;}
+    </style>
+</head>
+<body class="antialiased selection:bg-blue-500 selection:text-white">
+
+    <nav class="fixed w-full top-0 z-50 bg-[#0a0a0a]/80 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <span class="text-xl font-bold tracking-tighter">ALVITO KRISHNA</span>
+            <div class="space-x-6 text-sm font-semibold text-neutral-400 hidden md:block">
+                <a href="#about" class="hover:text-white transition">Tentang Saya</a>
+                <a href="#journal" class="hover:text-white transition">Jurnal</a>
+                <a href="#work" class="hover:text-white transition">Galeri Peta</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="min-h-screen flex items-center justify-center pt-20 px-6 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/20 via-[#0a0a0a] to-[#0a0a0a] -z-10"></div>
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="inline-block px-4 py-1.5 mb-6 rounded-full border border-white/10 bg-white/5 text-sm font-semibold text-neutral-300">
+                FIELD ASSISTANT & GIS ANALYST
+            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight leading-tight mb-6">
+                Dari Peta Statis Menuju <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Kanvas Interaktif.</span>
+            </h1>
+            <p class="text-lg md:text-xl text-neutral-400 max-w-2xl mx-auto leading-relaxed mb-10">
+                Mengeksplorasi jembatan antara analisis spasial tingkat tinggi dengan antarmuka web modern yang bersih dan responsif.
+            </p>
+            <a href="#about" class="inline-flex items-center justify-center px-8 py-4 text-sm font-bold bg-white text-black rounded-full hover:bg-neutral-200 transition duration-300">
+                Tentang Saya
+            </a>
+        </div>
+    </section>
+
+    <section id="about" class="py-24 px-6 border-t border-white/5 bg-neutral-950/50">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-10">
+            
+            <div class="w-full md:w-1/3">
+                <div class="bg-gradient-to-b from-[#111827] to-[#0a0a0a] border border-white/10 rounded-3xl p-8 sticky top-24 shadow-2xl">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-32 h-32 rounded-full bg-neutral-800 border-4 border-neutral-700 mb-6 flex items-center justify-center overflow-hidden">
+                            <svg class="w-16 h-16 text-neutral-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                        </div>
+                        
+                        <h2 class="text-xl font-bold text-white mb-1">Alvito Krishna Balapradhana</h2>
+                        <p class="text-sm text-neutral-400 mb-8">GIS Specialist & Analyst</p>
+
+                        <div class="w-full flex flex-col gap-3 text-sm">
+                            <a href="tel:085643258309" class="flex items-center justify-center gap-2 py-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition border border-white/5 text-neutral-300">
+                                <span>📱</span> 0856-4325-8309
+                            </a>
+                            <a href="mailto:krishna.balapradhana@gmail.com" class="flex items-center justify-center gap-2 py-2 px-4 rounded-lg bg-white/5 hover:bg-white/10 transition border border-white/5 text-neutral-300">
+                                <span>✉️</span> krishna.balapradhana@gmail.com
+                            </a>
+                            <a href="https://www.linkedin.com/in/alvito-krishna-balapradhana-7550651a8" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 py-2 px-4 rounded-lg bg-[#0077b5]/20 hover:bg-[#0077b5]/40 transition border border-[#0077b5]/30 text-[#0077b5]">
+                                <span>💼</span> LinkedIn
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full md:w-2/3 space-y-10">
+                <div>
+                    <h2 class="text-3xl font-bold tracking-tight mb-4 text-white">Tentang Saya</h2>
+                    <p class="text-neutral-300 leading-relaxed">
+                        Lulusan <strong class="text-white">Universitas Padjadjaran</strong> dengan latar belakang Agroteknologi yang memiliki gairah besar dalam Sistem Informasi Geografis (SIG) dan pemantauan lingkungan. Saat ini berdedikasi sebagai spesialis data geospasial untuk Kementerian Pertanian Republik Indonesia, berfokus pada pemetaan tematik ketahanan pangan, manajemen basis data keruangan, serta eksplorasi teknologi WebGIS.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2"><span>📋</span> Biodata</h3>
+                    <div class="bg-neutral-900 border border-white/10 rounded-2xl overflow-hidden">
+                        <table class="w-full text-left text-sm text-neutral-300">
+                            <tbody class="divide-y divide-white/5">
+                                <tr><td class="py-4 px-6 font-semibold w-1/3">Nama</td><td class="py-4 px-6">Alvito Krishna Balapradhana</td></tr>
+                                <tr><td class="py-4 px-6 font-semibold">Domisili</td><td class="py-4 px-6">Kota Bekasi, Jawa Barat, Indonesia</td></tr>
+                                <tr><td class="py-4 px-6 font-semibold">Status Profesional</td><td class="py-4 px-6">Field Assistant / GIS Specialist & Analyst — Kementerian Pertanian RI</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2"><span>🚀</span> Rekam Jejak Profesional & Akademik</h3>
+                    <div class="border-l border-blue-500/50 pl-6 ml-2 relative space-y-8">
+                        
+                        <div class="relative">
+                            <span class="absolute -left-[31px] top-1.5 w-3 h-3 rounded-full bg-purple-400 ring-4 ring-[#0a0a0a]"></span>
+                            <h4 class="text-purple-400 text-xs font-bold tracking-wider mb-2">MEI 2026 - SEKARANG</h4>
+                            <div class="flex items-start gap-4">
+                                <div class="bg-white p-2 rounded-xl border border-white/20 shrink-0 w-16 h-16 flex items-center justify-center">
+                                    <img src="Object/MAPID.jpeg" alt="MAPID Academy" class="w-full h-full object-contain" loading="lazy">
+                                </div>
+                                <div>
+                                    <h3 class="text-white font-bold text-lg leading-tight">MAPID Academy</h3>
+                                    <p class="text-neutral-400 text-sm mt-1">WebGIS Development Bootcamp • Studi intensif pemrograman antarmuka (HTML, CSS, Tailwind) dan integrasi data geospasial interaktif.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="relative">
+                            <span class="absolute -left-[31px] top-1.5 w-3 h-3 rounded-full bg-blue-400 ring-4 ring-[#0a0a0a]"></span>
+                            <h4 class="text-blue-400 text-xs font-bold tracking-wider mb-1">NOV 2025 - MEI 2026</h4>
+                            <h3 class="text-white font-bold text-lg">Kementerian Pertanian Republik Indonesia (Dirjen LIP)</h3>
+                            <p class="text-neutral-400 text-sm mt-1">Field Assistant / GIS Specialist & Analyst • Jakarta Selatan</p>
+                        </div>
+                        <div class="relative">
+                            <span class="absolute -left-[31px] top-1.5 w-3 h-3 rounded-full bg-emerald-400 ring-4 ring-[#0a0a0a]"></span>
+                            <h4 class="text-emerald-400 text-xs font-bold tracking-wider mb-1">SEP 2025</h4>
+                            <h3 class="text-white font-bold text-lg">Universitas Padjadjaran</h3>
+                            <p class="text-neutral-400 text-sm mt-1">Bachelor of Science (S.Agr.), Agrotechnology • IPK: 3.40</p>
+                        </div>
+                        <div class="relative">
+                            <span class="absolute -left-[31px] top-1.5 w-3 h-3 rounded-full bg-neutral-600 ring-4 ring-[#0a0a0a]"></span>
+                            <h4 class="text-neutral-500 text-xs font-bold tracking-wider mb-1">JUL 2021</h4>
+                            <h3 class="text-white font-bold text-lg">SMAIT Fathan Mubina</h3>
+                            <p class="text-neutral-400 text-sm mt-1">High School Diploma • Bogor</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2"><span>🛠️</span> Keahlian Teknis & Sertifikasi</h3>
+                    <div class="space-y-5">
+                        <div>
+                            <p class="text-sm text-neutral-500 mb-2">Lisensi & Sertifikasi Profesional</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-4 py-1.5 text-sm font-medium rounded-full border border-amber-500/30 text-amber-300 bg-amber-500/10">Sertifikat Kompetensi Analisis GIS (Level 6 - BNSP)</span>
+                                <span class="px-4 py-1.5 text-sm font-medium rounded-full border border-amber-500/30 text-amber-300 bg-amber-500/10">Ahli K3 Umum (HSO)</span>
+                                <span class="px-4 py-1.5 text-sm font-medium rounded-full border border-amber-500/30 text-amber-300 bg-amber-500/10">ArcGIS Pro Fundamentals</span>
+                                <span class="px-4 py-1.5 text-sm font-medium rounded-full border border-amber-500/30 text-amber-300 bg-amber-500/10">ISPO Auditor Fundamentals</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-sm text-neutral-500 mb-2">Pengolahan Geospasial & Web</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-4 py-1.5 text-sm font-medium rounded-full border border-blue-500/30 text-blue-300 bg-blue-500/10">ArcGIS Pro</span>
+                                <span class="px-4 py-1.5 text-sm font-medium rounded-full border border-blue-500/30 text-blue-300 bg-blue-500/10">QGIS</span>
+                                <span class="px-4 py-1.5 text-sm font-medium rounded-full border border-emerald-500/30 text-emerald-300 bg-emerald-500/10">Google Earth Engine</span>
+                                <span class="px-4 py-1.5 text-sm font-medium rounded-full border border-purple-500/30 text-purple-300 bg-purple-500/10">WebGIS Development</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-sm text-neutral-500 mb-2">Teknik Lapangan & Analisis</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-4 py-1.5 text-sm font-medium rounded-full border border-slate-500/30 text-slate-300 bg-slate-500/10">Drone Data Acquisition (UAV Mapping)</span>
+                                <span class="px-4 py-1.5 text-sm font-medium rounded-full border border-slate-500/30 text-slate-300 bg-slate-500/10">GPS Land Surveying</span>
+                                <span class="px-4 py-1.5 text-sm font-medium rounded-full border border-slate-500/30 text-slate-300 bg-slate-500/10">Statistical Analysis (Data Modeling)</span>
+                                <span class="px-4 py-1.5 text-sm font-medium rounded-full border border-slate-500/30 text-slate-300 bg-slate-500/10">Experimental Design</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="journal" class="py-24 px-6 border-t border-white/5 bg-neutral-900/30">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-12 text-center text-transparent bg-clip-text bg-gradient-to-r from-white to-neutral-500">Dari Peta Konvensional Menuju Peta Interaktif</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 text-neutral-300 leading-relaxed text-lg">
+                <div class="space-y-6">
+                    <p>Dunia geospasial biasanya sangat bergantung pada perangkat lunak berat seperti Google Earth Engine, ArcGIS, atau QGIS untuk mengolah data dan menghasilkan analisis yang akurat. Namun, ada satu kendala utama: sebagus apa pun analisis peta yang dibuat, dampaknya tidak akan maksimal jika hanya bisa dibaca dan dipahami oleh sesama teknisi.</p>
+                    <p>Kebutuhan untuk membuat data geografis lebih mudah diakses oleh publik menuntut adanya media yang lebih fleksibel. Hal inilah yang mendorong peralihan dari sekadar menggunakan aplikasi peta desktop menuju pengembangan WebGIS—peta interaktif yang bisa diakses langsung melalui peramban web (browser).</p>
+                    <p>Proses membangun WebGIS membutuhkan keterampilan baru dalam pemrograman web (front-end). Berikut adalah tahapan transisi tersebut:</p>
+                </div>
+                <div class="flex flex-col space-y-4">
+                    <div class="p-6 bg-neutral-950/50 rounded-2xl border border-white/10 hover:border-emerald-500/50 transition duration-300">
+                        <h4 class="text-emerald-400 font-bold mb-2">Membangun Kerangka dengan HTML</h4>
+                        <p class="text-sm md:text-base text-neutral-400">Mempelajari HTML bisa diibaratkan seperti menyiapkan kanvas kosong atau peta dasar (basemap). Ini bukan lagi tentang menumpuk lapisan gambar (layer), melainkan menyusun kerangka informasi.</p>
+                    </div>
+                    <div class="p-6 bg-neutral-950/50 rounded-2xl border border-white/10 hover:border-blue-500/50 transition duration-300">
+                        <h4 class="text-blue-400 font-bold mb-2">Memberikan Tampilan Visual dengan CSS</h4>
+                        <p class="text-sm md:text-base text-neutral-400">Setelah kerangka terbentuk, CSS digunakan untuk memberikan bentuk dan keindahan visual. Mengatur warna, jarak, dan tata letak elemen menggunakan CSS membutuhkan ketelitian.</p>
+                    </div>
+                    <div class="p-6 bg-neutral-950/50 rounded-2xl border border-white/10 hover:border-cyan-400/50 transition duration-300">
+                        <h4 class="text-cyan-400 font-bold mb-2">Mempercepat Proses dengan Tailwind CSS</h4>
+                        <p class="text-sm md:text-base text-neutral-400">Cara kerja menjadi jauh lebih efisien ketika mengadopsi Tailwind CSS. Pembuatan dashboard peta yang responsif dapat dilakukan dengan sangat cepat.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="work" class="py-20 px-6 border-t border-white/5 bg-neutral-950">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-12 text-center md:text-left">
+                <h2 class="text-3xl font-bold tracking-tight">Galeri Pemetaan</h2>
+                <p class="text-neutral-400 mt-2">Visualisasi data spasial statis dan pengembangan WebGIS Interaktif.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+                <!-- Card 1: Peta Aktual Kopi -->
+                <div class="bg-neutral-900 rounded-3xl overflow-hidden border border-white/10 shadow-lg group">
+                    <div class="h-48 overflow-hidden flex items-center justify-center bg-black p-0">
+                        <img src="Object/PETA AKTUAL KOPI.png" alt="Peta Aktual Kopi" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy">
+                    </div>
+                    <div class="p-5"><h3 class="text-lg font-bold text-white mb-1">Peta Aktual Kopi</h3></div>
+                </div>
+
+                <!-- Card 2: Peta Kerja Aktual Padi -->
+                <div class="bg-neutral-900 rounded-3xl overflow-hidden border border-white/10 shadow-lg group">
+                    <div class="h-48 overflow-hidden flex items-center justify-center bg-black p-0">
+                        <img src="Object/PETA KERJA AKTUAL_PADI.png" alt="Peta Kerja Aktual Padi" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy">
+                    </div>
+                    <div class="p-5"><h3 class="text-lg font-bold text-white mb-1">Peta Kerja Aktual Padi</h3></div>
+                </div>
+
+                <!-- Card 3: Peta Penggunaan Lahan -->
+                <div class="bg-neutral-900 rounded-3xl overflow-hidden border border-white/10 shadow-lg group">
+                    <div class="h-48 overflow-hidden flex items-center justify-center bg-black p-0">
+                        <img src="Object/PETA PENGGUNAAN LAHAN.png" alt="Peta Penggunaan Lahan" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy">
+                    </div>
+                    <div class="p-5"><h3 class="text-lg font-bold text-white mb-1">Peta Penggunaan Lahan</h3></div>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-2xl font-bold text-white mb-4">WebGIS Interaktif: Komparasi Heatmap Topografi</h3>
+                <div class="p-1 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-3xl">
+                    <div id="interactive-map-container" class="bg-neutral-900">
+                        <div id="map_folium_instance" class="w-full h-full"></div>
+                        <img id="float_image_north" alt="Arah Utara" src="./data/north.png" class="absolute bottom-[30px] left-[10px] w-[60px] h-[60px] z-[9999]" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="border-t border-white/10 py-10 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-neutral-500 text-sm">© 2026 Alvito Krishna Balapradhana. Dirancang dengan HTML, CSS, dan Tailwind.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Inisialisasi Peta
+        var map_folium_instance = L.map("map_folium_instance", {
+            center: [48.0, 5.0],
+            zoom: 6,
+            zoomControl: true,
+            preferCanvas: false,
+        });
+        L.control.scale().addTo(map_folium_instance);
+
+        // Layer 1: OpenStreetMap
+        var tile_layer_osm = L.tileLayer(
+            "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+            {
+                minZoom: 0, maxZoom: 19, attribution: "&copy; OpenStreetMap contributors"
+            }
+        ).addTo(map_folium_instance);
+
+        // Feature Group untuk Heatmap
+        var feature_group_heat = L.featureGroup({}).addTo(map_folium_instance);
+        var heat_map_data = L.heatLayer(
+            [[47.12386061571911, 3.3454539550310587, 2.6048], [46.46501420238838, 5.816275807259943, 2.1600], [47.66870135281892, 6.547920519240511, 2.8490], [46.82808053077438, 4.039340531775165, 1.9194], [47.7873605564039, 4.160348179384353, 1.8353], [48.420728754129826, 6.139212759487266, 2.4009]],
+            { minOpacity: 0.5, maxZoom: 18, radius: 15, blur: 15 }
+        ).addTo(feature_group_heat);
+
+        // Layer 2: USGS Imagery Topo
+        var tile_layer_usgs = L.tileLayer(
+            "https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryTopo/MapServer/tile/{z}/{y}/{x}",
+            { minZoom: 0, maxZoom: 18, attribution: "Tiles courtesy of the U.S. Geological Survey" }
+        ).addTo(map_folium_instance);
+
+        // Mini Map
+        var tile_layer_minimap = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {minZoom: 0, maxZoom: 19});
+        var mini_map_control = new L.Control.MiniMap(tile_layer_minimap, { position: "bottomright", width: 120, height: 120, toggleDisplay: true }).addTo(map_folium_instance);
+
+        // Side by Side Control
+        L.control.sideBySide(tile_layer_osm, tile_layer_usgs).addTo(map_folium_instance);
+    </script>
+
+</body>
+</html>
